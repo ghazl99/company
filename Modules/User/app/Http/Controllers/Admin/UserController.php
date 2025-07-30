@@ -9,9 +9,18 @@ use Modules\User\Models\User;
 use Modules\User\Repositories\UserModelRepository;
 use Modules\User\Services\UserService;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 
-class UserController extends Controller
+class UserController extends Controller implements HasMiddleware
 {
+    public static function middleware(): array
+    {
+        return [
+            new Middleware('role:superAdmin'),
+        ];
+    }
+
     public function __construct(
         protected UserService $userService,
         protected UserModelRepository $userRepository

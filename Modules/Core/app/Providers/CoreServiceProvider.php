@@ -33,7 +33,7 @@ class CoreServiceProvider extends ServiceProvider
         $this->registerConfig();
         $this->registerViews();
         $this->loadMigrationsFrom(module_path($this->name, 'database/migrations'));
-        View::composer('*', function ($view) {
+        View::composer('core::admin.dashboard', function ($view) {
             $user = Auth::user(); // المستخدم الحالي
 
             if ($user->hasRole('superAdmin')) {

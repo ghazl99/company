@@ -5,14 +5,13 @@ namespace Modules\User\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controllers\HasMiddleware;
-use Illuminate\Routing\Controllers\Middleware;
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Modules\User\Http\Requests\LoginRequest;
 use Modules\User\Services\UserService;
 
-class AuthenticatedController extends Controller 
+class AuthenticatedController extends Controller
 {
 
 
