@@ -1,0 +1,11 @@
+{
+    "name": "WorkSession",
+    "alias": "worksession",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\WorkSession\\Providers\\WorkSessionServiceProvider"
+    ],
+    "files": []
+}

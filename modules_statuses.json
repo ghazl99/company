@@ -1,0 +1,7 @@
+{
+    "Core": true,
+    "User": true,
+    "Task": true,
+    "WorkSession": true,
+    "ActivityLog": true
+}

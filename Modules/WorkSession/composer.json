@@ -1,0 +1,30 @@
+{
+    "name": "nwidart/worksession",
+    "description": "",
+    "authors": [
+        {
+            "name": "Nicolas Widart",
+            "email": "n.widart@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\WorkSession\\": "app/",
+            "Modules\\WorkSession\\Database\\Factories\\": "database/factories/",
+            "Modules\\WorkSession\\Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Modules\\WorkSession\\Tests\\": "tests/"
+        }
+    }
+}
