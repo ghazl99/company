@@ -10,11 +10,12 @@ class TaskModelRepository implements TaskRepository
     public function getAllTasks($user)
     {
         if ($user->hasRole('superAdmin')) {
-            return Task::with('developers')->paginate(20);
+            return Task::with('developers')->latest()->paginate(10);
         } else {
             return $user->tasks()
                 ->wherePivotNotIn('status', ['done', 'expired'])
-                ->paginate(20);
+                ->orderByDesc('tasks.created_at')
+                ->paginate(10);
         }
     }
 

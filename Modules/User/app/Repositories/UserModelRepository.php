@@ -11,6 +11,7 @@ class UserModelRepository implements UserRepository
         return User::role('developer')->with('activeWorkSession')->get();
     }
 
+
     public function store(array $data): mixed
     {
         $user = User::create($data);
@@ -21,8 +22,7 @@ class UserModelRepository implements UserRepository
 
     public function getActiveDevelopers()
     {
-        return User::role('developer')->where('is_blocked', 0)
-            ->get();
+        return User::unblockedDevelopers()->get();
     }
 
     public function update(array $data, $user)

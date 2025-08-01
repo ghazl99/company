@@ -91,10 +91,17 @@ class User extends Authenticatable implements HasMedia
             ->withTimestamps();
     }
 
+    // Returns the latest active work session (where end_time is null) for the developer.
     public function activeWorkSession()
     {
         return $this->hasOne(WorkSession::class, 'developer_id')
             ->whereNull('end_time')
-            ->latest(); 
+            ->latest();
+    }
+    
+    // Scope to get all unblocked developers.
+    public function scopeUnblockedDevelopers($query)
+    {
+        return $query->role('developer')->where('is_blocked', 0);
     }
 }

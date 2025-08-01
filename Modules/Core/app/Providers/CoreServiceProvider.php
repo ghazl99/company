@@ -93,7 +93,7 @@ class CoreServiceProvider extends ServiceProvider
                     return "{$hours} ساعة و {$minutes} دقيقة";
                 });
 
-                $monthHours = Cache::remember("dev_{$developerId}_month_hours", now()->addMinutes(10), function () use ($developerId) {
+                $monthHours = Cache::remember("dev_{$developerId}_month_hours", now()->addMinutes(1), function () use ($developerId) {
                     $totalSeconds = WorkSession::where('developer_id', $developerId)
                         ->whereBetween('start_time', [now()->startOfMonth(), now()->endOfMonth()])
                         ->sum('duration_seconds');

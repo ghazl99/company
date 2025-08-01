@@ -134,17 +134,10 @@
     <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.responsive.min.js') }}"></script>
     <script src="{{ URL::asset('assets/plugins/datatable/js/responsive.bootstrap4.min.js') }}"></script>
     <script src="{{ URL::asset('assets/js/table-data.js') }}"></script>
-    <script>
-        $('#users').DataTable({
-            paging: true,
-            searching: true,
-            ordering: true,
-            info: true
-        });
-    </script>
+   
     <script>
         $(document).ready(function() {
-            $('#categories-datatable').DataTable({
+            $('#users').DataTable({
                 paging: false,
                 searching: true,
                 ordering: true,
