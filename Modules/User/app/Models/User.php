@@ -98,7 +98,7 @@ class User extends Authenticatable implements HasMedia
             ->whereNull('end_time')
             ->latest();
     }
-    
+
     // Scope to get all unblocked developers.
     public function scopeUnblockedDevelopers($query)
     {

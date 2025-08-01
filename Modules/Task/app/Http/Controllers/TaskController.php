@@ -4,6 +4,8 @@ namespace Modules\Task\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\Auth;
 use Modules\Task\Http\Requests\taskRequest;
 use Modules\Task\Models\Task;
@@ -11,18 +13,18 @@ use Modules\Task\Services\TaskService;
 use Modules\User\Models\User;
 use Modules\User\Repositories\UserRepository;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
-use Illuminate\Routing\Controllers\HasMiddleware;
-use Illuminate\Routing\Controllers\Middleware;
+
 class TaskController extends Controller implements HasMiddleware
 {
     public static function middleware(): array
     {
         return [
-            new Middleware('role:superAdmin', only: ['create', 'store', 'show','edit', 'update', 'destroy']),
+            new Middleware('role:superAdmin', only: ['create', 'store', 'show', 'edit', 'update', 'destroy']),
 
             new Middleware('role:developer|superAdmin', only: ['index', 'changeStatus', 'showImage']),
         ];
     }
+
     public function __construct(
         protected TaskService $taskService,
         protected UserRepository $userRepo

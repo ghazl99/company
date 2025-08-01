@@ -35,7 +35,6 @@ class TaskService
                     });
             }
 
-
             return $task;
         });
     }

@@ -5,7 +5,6 @@ namespace Modules\User\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Modules\User\Http\Requests\LoginRequest;
@@ -13,8 +12,6 @@ use Modules\User\Services\UserService;
 
 class AuthenticatedController extends Controller
 {
-
-
     public function __construct(
         protected UserService $userService,
     ) {}

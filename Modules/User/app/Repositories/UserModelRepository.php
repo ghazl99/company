@@ -11,7 +11,6 @@ class UserModelRepository implements UserRepository
         return User::role('developer')->with('activeWorkSession')->get();
     }
 
-
     public function store(array $data): mixed
     {
         $user = User::create($data);

@@ -3,14 +3,14 @@
 namespace Modules\User\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 use Modules\User\Http\Requests\UpdateUserRequest;
 use Modules\User\Http\Requests\UserRequest;
 use Modules\User\Models\User;
 use Modules\User\Repositories\UserModelRepository;
 use Modules\User\Services\UserService;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
-use Illuminate\Routing\Controllers\HasMiddleware;
-use Illuminate\Routing\Controllers\Middleware;
 
 class UserController extends Controller implements HasMiddleware
 {
