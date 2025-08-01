@@ -3,9 +3,11 @@
 namespace Modules\User\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\DB;
 use Modules\Task\Models\Task;
 use Modules\WorkSession\Models\WorkSession;
 use Spatie\MediaLibrary\HasMedia;
@@ -103,5 +105,15 @@ class User extends Authenticatable implements HasMedia
     public function scopeUnblockedDevelopers($query)
     {
         return $query->role('developer')->where('is_blocked', 0);
+    }
+
+    // Count today's candidate tasks assigned to the current developer
+    public function todayCandidateTasksCount()
+    {
+        return DB::table('task_assignments')
+            ->where('developer_id', $this->id)
+            ->where('status', 'candidate')
+            ->whereDate('created_at', Carbon::today())
+            ->count();
     }
 }

@@ -54,7 +54,9 @@
                 <li class="slide">
                     <a class="side-menu__item" href="{{ route('task.index') }}">
                         <i class="mdi mdi-clipboard-text side-menu__icon "></i>
-                        <span class="side-menu__label">إدارة المهام</span></a>
+                        <span class="side-menu__label">إدارة المهام</span>
+                        @role('developer')<span
+                            class="badge badge-success side-badge">{{ auth()->user()->todayCandidateTasksCount() }}</span>@endrole</a>
                 </li>
             @endhasanyrole
             @role('superAdmin')
@@ -62,8 +64,7 @@
                 <li class="slide">
                     <a class="side-menu__item" href="{{ route('user.index') }}">
                         <i class="mdi mdi-account-multiple side-menu__icon "></i>
-                        <span class="side-menu__label">إدارة المستخدمين</span><span
-                            class="badge badge-success side-badge">1</span></a>
+                        <span class="side-menu__label">إدارة المستخدمين</span></a>
                 </li>
 
                 <li class="side-item side-item-category">النشاطات</li>
