@@ -5,9 +5,16 @@ namespace Modules\ActivityLog\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Modules\ActivityLog\Services\ActivityLogService;
-
-class ActivityLogController extends Controller
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
+class ActivityLogController extends Controller implements HasMiddleware
 {
+    public static function middleware(): array
+    {
+        return [
+            new Middleware('role:superAdmin'),
+        ];
+    }
     public function __construct(
         protected ActivityLogService $activityService
     ) {}

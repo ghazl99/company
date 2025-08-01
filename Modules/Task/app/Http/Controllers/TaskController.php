@@ -13,9 +13,16 @@ use Modules\User\Repositories\UserRepository;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
-class TaskController extends Controller 
+class TaskController extends Controller implements HasMiddleware
 {
+    public static function middleware(): array
+    {
+        return [
+            new Middleware('role:superAdmin', only: ['create', 'store', 'show','edit', 'update', 'destroy']),
 
+            new Middleware('role:developer|superAdmin', only: ['index', 'changeStatus', 'showImage']),
+        ];
+    }
     public function __construct(
         protected TaskService $taskService,
         protected UserRepository $userRepo
