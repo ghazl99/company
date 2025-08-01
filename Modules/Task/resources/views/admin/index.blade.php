@@ -1,4 +1,10 @@
 @extends('core::layouts.master')
+<link href="{{ URL::asset('assets/plugins/datatable/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet" />
+<link href="{{ URL::asset('assets/plugins/datatable/css/buttons.bootstrap4.min.css') }}" rel="stylesheet">
+<link href="{{ URL::asset('assets/plugins/datatable/css/responsive.bootstrap4.min.css') }}" rel="stylesheet" />
+<link href="{{ URL::asset('assets/plugins/datatable/css/jquery.dataTables.min.css') }}" rel="stylesheet">
+<link href="{{ URL::asset('assets/plugins/datatable/css/responsive.dataTables.min.css') }}" rel="stylesheet">
+<link href="{{ URL::asset('assets/plugins/select2/css/select2.min.css') }}" rel="stylesheet">
 {{-- imageModal css --}}
 <link rel="stylesheet" href="{{ URL::asset('build/assets/css/imageModal.css') }}">
 @section('content')
@@ -20,7 +26,7 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive-md">
-                    <table class="table table-bordered">
+                    <table class="table table-bordered" id="tasks-table">
                         <thead>
                             <tr>
                                 <th>العنوان</th>
@@ -47,6 +53,11 @@
                             @endforeach
                         </tbody>
                     </table>
+                    <div class="d-flex justify-content-center mt-4">
+                        {{ $tasks->links() }}
+                    </div>
+
+
                 </div>
             </div>
         </div>
@@ -61,7 +72,7 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive-md">
-                    <table class="table table-bordered">
+                    <table class="table table-bordered" id="tasks-table">
                         <thead>
                             <tr>
                                 <th>العنوان</th>
@@ -112,7 +123,7 @@
                                                 <button type="submit" class="btn btn-sm btn-danger">رفض</button>
                                             </form>
 
-                                            <form action="{{ route('task.changeStatus', [$task->id,Auth::user()->id]) }}"
+                                            <form action="{{ route('task.changeStatus', [$task->id, Auth::user()->id]) }}"
                                                 method="POST" style="display:inline-block;">
                                                 @csrf
                                                 @method('PATCH')
@@ -134,6 +145,11 @@
                             @endforeach
                         </tbody>
                     </table>
+                    <div class="d-flex justify-content-center mt-4">
+                        {{ $tasks->links() }}
+                    </div>
+
+
                 </div>
             </div>
         </div>
@@ -143,34 +159,44 @@
             <img class="modal-content" id="img01">
             <div id="caption"></div>
         </div>
-        @section('js')
-            <script>
-                document.addEventListener("DOMContentLoaded", function() {
-                    const modal = document.getElementById("myModal");
-                    const modalImg = document.getElementById("img01");
-                    const captionText = document.getElementById("caption");
-                    const closeBtn = document.getElementsByClassName("close")[0];
-                    const images = document.querySelectorAll('.myImg');
-
-                    images.forEach(img => {
-                        img.addEventListener("click", function() {
-                            modal.style.display = "block";
-                            modalImg.src = this.src;
-                            captionText.innerHTML = this.alt || "";
-                        });
-                    });
-
-                    closeBtn.onclick = function() {
-                        modal.style.display = "none";
-                    };
-
-                    modal.onclick = function(event) {
-                        if (event.target === modal) {
-                            modal.style.display = "none";
-                        }
-                    };
-                });
-            </script>
-        @endsection
     @endrole
+@endsection
+@section('js')
+    {{-- سكربتات DataTables --}}
+    <script src="{{ URL::asset('assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            $('#tasks-table').DataTable({
+                paging: false,
+                searching: false,
+                ordering: true,
+                info: false,
+            });
+
+            // image modal setup
+            const modal = document.getElementById("myModal");
+            const modalImg = document.getElementById("img01");
+            const captionText = document.getElementById("caption");
+            const closeBtn = document.getElementsByClassName("close")[0];
+            const images = document.querySelectorAll('.myImg');
+
+            images.forEach(img => {
+                img.addEventListener("click", function() {
+                    modal.style.display = "block";
+                    modalImg.src = this.src;
+                    captionText.innerHTML = this.alt || "";
+                });
+            });
+
+            closeBtn.onclick = function() {
+                modal.style.display = "none";
+            };
+
+            modal.onclick = function(event) {
+                if (event.target === modal) {
+                    modal.style.display = "none";
+                }
+            };
+        });
+    </script>
 @endsection
